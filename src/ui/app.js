@@ -1,9 +1,10 @@
-import { createIcons, ArrowLeft, Bookmark, Check, ChevronDown, ChevronRight, Plus, TriangleAlert } from 'lucide';
+import { createIcons, ArrowLeft, Bookmark, Check, ChevronDown, ChevronRight, Plus, TriangleAlert, X } from 'lucide';
+import { createDialog } from './dialog.js';
 import { todayInBerlin, deadlineEndsAt, dayNumber, dayAfter, validDay, historyStamp } from '../domain/time.ts';
 import { canManageProject, planProjectDeletion, deleteProject } from '../domain/projects.ts';
 
 export function createApp(root, data, repository) {
-  const lucide={createIcons:()=>createIcons({icons:{ArrowLeft, Bookmark, Check, ChevronDown, ChevronRight, Plus, TriangleAlert},root,attrs:{width:16,height:16}})};
+  const lucide={createIcons:()=>createIcons({icons:{ArrowLeft, Bookmark, Check, ChevronDown, ChevronRight, Plus, TriangleAlert, X},root,attrs:{width:16,height:16}})};
     const content=root.querySelector('#ff-content');
     const live=root.querySelector('#ff-live');
     let now=Date.now();
@@ -15,6 +16,8 @@ export function createApp(root, data, repository) {
     const kinds={internal:'Interne Frist',urgency:'Dringlichkeitsfrist',enforcement:'Vollziehungsfrist',pleading:'Frist'};
     let nextDeadlineId=data.nextDeadlineId;
     const state={user:data.activeUser,role:people[data.activeUser].role,view:'deadlines',scope:people[data.activeUser].role==='partner'?'responsibility':'mine',detail:null,edit:null,projectEdit:null,projectDeleteStage:null,projectDeleteMode:'keep',projectDeleteReviewed:'',newParent:null,preliminaryDraft:'',collapsed:new Set()};
+    const dialog=createDialog(root,()=>{state.newParent=null;state.preliminaryDraft='';navigate('deadlines');});
+    let renderedList='';
     const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const icon=name=>'<i data-lucide="'+name+'" aria-hidden="true"></i>';
     const get=id=>items.find(d=>d.id===id);
@@ -190,7 +193,7 @@ export function createApp(root, data, repository) {
       const d=get(state.detail),m=matters[d.matter],editable=mayEdit(d),internal=d.kind==='internal';
       const linked=items.filter(x=>x.parent===d.id).sort((a,b)=>end(a)-end(b));
       const doneButton=d.status==='Erledigt'?'':d.status==='Erledigungskontrolle offen'?(state.role!=='lawyer'?'<button type="button" class="ff-primary" data-edit="verify">Erledigung kontrollieren</button>':'<span class="ff-muted">Erledigungskontrolle offen</span>'):editable?'<button type="button" class="ff-primary" data-edit="complete">'+(internal?'Abschließen':'Erledigung melden')+'</button>':'';
-      return '<div class="ff-detail"><button type="button" class="ff-back" data-back>'+icon('arrow-left')+'Zur Übersicht</button><div class="ff-detail-title"><h1>'+esc(d.title)+'</h1><p class="ff-heading-sub">'+esc(m.name)+' · '+esc(m.code)+exceptionMarkup(d)+'</p></div>'
+      return '<div class="ff-detail"><div class="ff-detail-title"><h1>'+esc(d.title)+'</h1><p class="ff-heading-sub">'+esc(m.name)+' · '+esc(m.code)+exceptionMarkup(d)+'</p></div>'
         +'<div class="ff-detail-date"><div style="flex:1;min-width:0"><strong class="'+(d.day<=today?'ff-today':'')+'">'+esc(dueLabel(d))+'</strong><div class="ff-detail-meter">'+deadlineBar(d)+'</div></div>'+(editable?'<div class="ff-date-actions">'+(state.role!=='lawyer'||['internal','urgency'].includes(d.kind)?'<button type="button" class="ff-text-action" data-edit="date">Datum ändern</button>':'')+'<button type="button" class="ff-text-action" data-edit="preliminary">'+(d.preliminary?'Vorfrist ändern':'Vorfrist setzen')+'</button>'+(d.preliminary&&d.status!=='Erledigt'?'<button type="button" class="ff-text-action" data-preliminary-done>'+(d.preliminary.done?'Vorfrist wieder öffnen':'Vorfrist erledigen')+'</button>':'')+'</div>':'')+'</div>'
         +'<div class="ff-keyrow"><span class="ff-keylabel">Projekt</span><div>'+esc(projectLabel(d.project))+'</div>'+(editable?'<button type="button" class="ff-text-action" data-edit="project" aria-label="Projektzuordnung ändern">Ändern</button>':'')+'</div>'
         +'<div class="ff-keyrow"><span class="ff-keylabel">Zuständigkeit</span><div>'+esc(personNames(d.assignees))+'</div>'+(editable?'<button type="button" class="ff-text-action" data-edit="assign">Ändern</button>':'')+'</div>'
@@ -201,7 +204,8 @@ export function createApp(root, data, repository) {
         +'<div class="ff-actions">'+doneButton+(!internal&&d.status!=='Erledigt'&&editable?'<button type="button" class="ff-text-action" data-add-internal>Interne Frist hinzufügen</button>':'')+(editable?'<button type="button" class="ff-text-action" data-edit="kind">Kennzeichnung ändern</button>':'')+subscriptionAction(d,false)+'</div></div>';
     }
     function formFrame(title,body,label,destructive=false){
-      return '<div class="ff-detail ff-form"><button type="button" class="ff-back" data-cancel>'+icon('arrow-left')+'Zurück</button><div class="ff-detail-title"><h1>'+title+'</h1></div><form id="ff-form">'+body+'<div class="ff-actions"><button type="submit" class="ff-primary'+(destructive?' ff-danger':'')+'" id="ff-submit">'+label+'</button><button type="button" class="ff-text-action" data-cancel>Abbrechen</button></div><div class="ff-error" id="ff-error" role="alert"></div></form></div>';
+      const back=state.edit||state.projectDeleteStage||state.view==='new'&&state.newParent;
+      return '<div class="ff-detail ff-form">'+(back?'<button type="button" class="ff-back" data-cancel>'+icon('arrow-left')+'Zurück</button>':'')+'<div class="ff-detail-title"><h1>'+title+'</h1></div><form id="ff-form">'+body+'<div class="ff-actions"><button type="submit" class="ff-primary'+(destructive?' ff-danger':'')+'" id="ff-submit">'+label+'</button><button type="button" class="ff-text-action" data-cancel>Abbrechen</button></div><div class="ff-error" id="ff-error" role="alert"></div></form></div>';
     }
     function kindFields(kind,notfrist=false){
       const flag=exceptionLabel({kind,notfrist})?(notfrist?'notfrist':kind):'none';
@@ -246,7 +250,7 @@ export function createApp(root, data, repository) {
     }
     function projectEditorView(){
       const creating=state.view==='project-new',p=creating?{name:'',partners:[partnerIds.includes(user())?user():'felix']}:projects[state.projectEdit];
-      if(!creating&&!mayEditProject(state.projectEdit))return '<div class="ff-detail"><button type="button" class="ff-back" data-cancel>'+icon('arrow-left')+'Zur Fristenliste</button><h1>'+esc(p.name)+'</h1><p class="ff-partner-note">'+esc(partnerLabel(p.partners))+'</p></div>';
+      if(!creating&&!mayEditProject(state.projectEdit))return '<div class="ff-detail"><h1>'+esc(p.name)+'</h1><p class="ff-partner-note">'+esc(partnerLabel(p.partners))+'</p></div>';
       if(state.projectDeleteStage)return projectDeleteView();
       return formFrame(creating?'Projekt anlegen':'Projekt bearbeiten','<label class="ff-field"><span>Projektname</span><input name="projectName" value="'+esc(p.name)+'" required autocomplete="off"></label><div class="ff-fieldgroup"><span class="ff-keylabel">Partner</span><fieldset class="ff-partner-picks ff-checks"><legend class="ff-sr">Verantwortliche Partner</legend>'+partnerChecks(p.partners)+'</fieldset></div><p class="ff-partner-source">Gilt für alle Fristen mit Partnerübernahme vom Projekt.</p>',creating?'Projekt anlegen':'Speichern')+(creating?'':'<div class="ff-detail ff-form ff-project-delete-action"><button type="button" class="ff-text-action ff-danger-text" data-delete-project>Projekt löschen</button></div>');
     }
@@ -298,22 +302,28 @@ export function createApp(root, data, repository) {
       try { repository.save(currentData());persistenceError=''; }
       catch (cause) { persistenceError='Nicht gespeichert: '+cause.message; }
     }
-    function render(){
+    function render({refreshList=false}={}){
       now=Date.now();today=todayInBerlin(now);
-      root.querySelector('#ff-nav').innerHTML='<button type="button" data-nav="deadlines" '+(state.view==='deadlines'?'aria-current="page"':'')+'>Fristen</button>';
+      root.querySelector('#ff-nav').innerHTML='<button type="button" data-nav="deadlines" aria-current="page">Fristen</button>';
       root.querySelector('#ff-avatar').textContent=people[user()].initials;
       root.querySelector('#ff-profile-name').textContent=pname(user());
       root.querySelector('#ff-profile-name').hidden=userSettings[user()].nameDisplay!=='full';
       root.querySelector('#ff-profile-users').innerHTML=['clara','sophie','till','lena','jonas','felix','mara'].map(id=>'<button type="button" data-user="'+id+'">'+esc(pname(id))+' · '+({assistant:'Assistenz',lawyer:'Anwalt',partner:'Partner'}[people[id].role])+'</button>').join('');
-      content.innerHTML=state.view==='settings'?settingsView():state.view==='new'?newView():state.view==='project-new'||state.projectEdit?projectEditorView():state.edit?editView():state.detail?detailView():listView();
+      const modalMarkup=state.view==='settings'?settingsView():state.view==='new'?newView():state.view==='project-new'||state.projectEdit?projectEditorView():state.edit?editView():state.detail?detailView():null;
+      const modalKey=[state.view,state.projectEdit,state.projectDeleteStage,state.detail,state.edit].join(':');
+      if(modalMarkup)dialog.update(modalMarkup,modalKey);
+      const listKey=state.scope+'|'+JSON.stringify(currentData());
+      if(refreshList||listKey!==renderedList){content.innerHTML=listView();renderedList=listKey;}
+      if(!modalMarkup)dialog.update(null,modalKey);
+      dialog.notice.textContent='';
       root.querySelector('#ff-clock').textContent=new Intl.DateTimeFormat('de-DE',{timeZone:'Europe/Berlin',dateStyle:'medium',timeStyle:'short'}).format(now)+' · Berlin';
       for(const element of root.querySelectorAll('[data-tooltip]'))element.setAttribute('title',element.dataset.tooltip);
       lucide.createIcons();
-      persist();if(persistenceError)live.textContent=persistenceError;
+      persist();if(persistenceError)notice(persistenceError);
     }
     function navigate(view){state.view=view;state.detail=null;state.edit=null;state.projectEdit=null;state.projectDeleteStage=null;state.projectDeleteMode='keep';state.projectDeleteReviewed='';live.textContent='';render();}
     function open(id){if(!get(id))return;state.detail=id;state.edit=null;state.projectEdit=null;state.projectDeleteStage=null;live.textContent='';render();}
-    function notice(text){live.textContent=persistenceError||text;}
+    function notice(text){const target=dialog.element.open?dialog.notice:live;target.textContent=persistenceError||text;}
     function error(text){root.querySelector('#ff-error').textContent=text;}
     function pickPreliminary(d,button,event){
       const track=button.querySelector('.ff-meter-track');
@@ -337,7 +347,7 @@ export function createApp(root, data, repository) {
         if(subscribed)subscriptions[user()].delete(d.id);else subscriptions[user()].add(d.id);
         render();
         notice(subscribed?(inOverview(d,user())?'Abonnement beendet. Die Frist bleibt aufgrund ihrer Zuordnung in Meine Fristen.':'Abonnement beendet.'):'Frist zu Meine Fristen hinzugefügt.');
-        const focusTarget=root.querySelector('[data-subscribe="'+d.id+'"]')||root.querySelector('#ff-scope > summary');
+        const focusTarget=dialog.element.open?dialog.element.querySelector('[data-subscribe="'+d.id+'"]')||root.querySelector('#ff-dialog-title'):content.querySelector('[data-subscribe="'+d.id+'"]')||root.querySelector('#ff-scope > summary');
         focusTarget?.focus({preventScroll:true});
         return;
       }
@@ -375,7 +385,6 @@ export function createApp(root, data, repository) {
         d.history.unshift(historyStamp()+' · '+personRef(user())+': Interne Vorfrist '+(d.preliminary.done?'als erledigt markiert.':'wieder geöffnet.'));
         render();notice(d.preliminary.done?'Vorfrist erledigt.':'Vorfrist wieder geöffnet.');return;
       }
-      if(b.hasAttribute('data-back')){state.detail=null;state.edit=null;live.textContent='';render();return;}
       if(b.hasAttribute('data-cancel')){
         if(state.projectDeleteStage){state.projectDeleteStage=state.projectDeleteStage==='warn'?'choose':null;state.projectDeleteReviewed='';live.textContent='';render();return;}
         if(state.view==='settings'||state.view==='project-new'){navigate('deadlines');return;}
@@ -403,7 +412,7 @@ export function createApp(root, data, repository) {
             if(from>until)return error('Das Ende der Vertretung darf nicht vor dem Beginn liegen.');
             coverage={deputy,from,until};
           }
-          assistantSettings[user()]={lawyers,coverage};state.scope='mine';
+          assistantSettings[user()]={lawyers,coverage};
         }
         userSettings[user()].weeks=weeks;userSettings[user()].nameDisplay=nameDisplay;navigate('deadlines');notice('Persönliche Einstellungen gespeichert.');return;
       }
@@ -467,7 +476,7 @@ export function createApp(root, data, repository) {
         const previous=projectLabel(d.project),partners=[...effectivePartners(d)];
         d.project=next;d.partners=next?null:partners;
         d.history.unshift(historyStamp()+' · '+personRef(user())+': Projektzuordnung geändert: '+previous+' → '+projectLabel(next)+'. Partner: '+partnerRefs(effectivePartners(d))+'.');
-        if(next)state.collapsed.delete(next);navigate('deadlines');notice('„'+d.title+'“ '+(next?'in „'+projects[next].name+'“ verschoben.':'als eigenständige Frist herausgelöst.'));return;
+        if(next)state.collapsed.delete(next);state.edit=null;render();notice('„'+d.title+'“ '+(next?'in „'+projects[next].name+'“ verschoben.':'als eigenständige Frist herausgelöst.'));return;
       }
       if(state.edit==='partners'){
         const selected=d.project&&fd.get('inherit')?null:[...new Set(fd.getAll('partners'))];
@@ -553,7 +562,7 @@ export function createApp(root, data, repository) {
     render();
     const clockTimer=setInterval(()=>{
       now=Date.now();today=todayInBerlin(now);
-      if(state.view==='deadlines'&&!state.detail&&!state.edit&&!state.projectEdit)render();
+      if(state.view==='deadlines'&&!state.detail&&!state.edit&&!state.projectEdit)render({refreshList:true});
     },60000);
     return ()=>clearInterval(clockTimer);
 }

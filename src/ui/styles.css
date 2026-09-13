@@ -1,4 +1,5 @@
-html { color-scheme: light dark; }
+html { color-scheme: light dark; scrollbar-gutter: stable; }
+html.ff-dialog-open { overflow: hidden; }
 body { margin: 0; background: light-dark(#fff, #191d23); }
 
     #fristen-app {
@@ -169,6 +170,18 @@ body { margin: 0; background: light-dark(#fff, #191d23); }
     #fristen-app .ff-actions { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; padding-top: 18px; }
     #fristen-app .ff-form { max-width: 590px; }
     #fristen-app .ff-form:has(input[name="title"]) { max-width: 720px; }
+    #fristen-app .ff-dialog { width: min(800px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 40px); margin: auto; padding: 0; border: 1px solid var(--ff-line); border-radius: 14px; background: var(--ff-paper); color: var(--ff-ink); font: inherit; box-shadow: 0 20px 70px light-dark(#17202c38, #00000080); overflow: hidden; }
+    #fristen-app .ff-dialog[open] { display: flex; flex-direction: column; }
+    #fristen-app .ff-dialog::backdrop { background: light-dark(#17202c52, #00000070); }
+    #fristen-app .ff-dialog-header { display: flex; align-items: flex-start; gap: 18px; padding: 24px 24px 18px; border-bottom: 1px solid var(--ff-line); }
+    #fristen-app #ff-dialog-heading { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+    #fristen-app .ff-dialog-header .ff-detail-title { margin: 0; }
+    #fristen-app .ff-dialog-header h1 { font-size: 23px; letter-spacing: -.5px; }
+    #fristen-app .ff-dialog-close { flex: 0 0 32px; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 6px; color: var(--ff-muted); }
+    #fristen-app .ff-dialog-close:hover { background: var(--ff-soft); color: var(--ff-ink); }
+    #fristen-app .ff-dialog-body { padding: 20px 24px 24px; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+    #fristen-app .ff-dialog .ff-detail { max-width: none; }
+    #fristen-app .ff-dialog .ff-notice:not(:empty) { padding: 0 0 16px; }
     #fristen-app .ff-field { display: grid; gap: 7px; margin-bottom: 16px; min-width: 0; }
     #fristen-app .ff-field > span { color: var(--ff-muted); font-size: 12px; }
     #fristen-app .ff-field input, #fristen-app .ff-field select, #fristen-app .ff-field textarea { width: 100%; min-width: 0; border: 1px solid var(--ff-line); background: var(--ff-paper); padding: 10px 11px; border-radius: 6px; }
@@ -226,6 +239,12 @@ body { margin: 0; background: light-dark(#fff, #191d23); }
       #fristen-app .ff-project-row { align-items: start; }
       #fristen-app .ff-step { flex-wrap: wrap; gap: 4px; }
       #fristen-app .ff-footer { margin-top: 16px; }
+      #fristen-app .ff-dialog { width: calc(100% - 20px); max-height: calc(100dvh - 24px); border-radius: 10px; }
+      #fristen-app .ff-dialog-header { padding: 16px; gap: 8px; }
+      #fristen-app .ff-dialog-header h1 { font-size: 21px; }
+      #fristen-app .ff-dialog-body { padding: 16px; }
+      #fristen-app .ff-dialog .ff-detail-date { flex-wrap: wrap; }
+      #fristen-app .ff-dialog .ff-date-actions { display: flex; flex-wrap: wrap; gap: 8px 18px; }
     }
     @media (pointer: coarse) {
       #fristen-app button, #fristen-app summary { min-height: 44px; }
@@ -236,5 +255,5 @@ body { margin: 0; background: light-dark(#fff, #191d23); }
       #fristen-app .ff-columns span:last-child { padding-right: 0; }
       #fristen-app input, #fristen-app select, #fristen-app textarea { font-size: 16px; }
       #fristen-app .ff-check { min-height: 44px; }
+      #fristen-app .ff-dialog-close { flex-basis: 44px; width: 44px; height: 44px; }
     }
-  

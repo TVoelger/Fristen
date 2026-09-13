@@ -17,5 +17,14 @@
     <div id="ff-content"></div>
     <footer class="ff-footer"><span>Testversion · lokale Beispieldaten</span><span id="ff-clock"></span></footer>
   </main>
-  
+  <dialog id="ff-dialog" class="ff-dialog" aria-labelledby="ff-dialog-title">
+    <header class="ff-dialog-header">
+      <div id="ff-dialog-heading"></div>
+      <button type="button" class="ff-dialog-close" data-dialog-close aria-label="Fenster schließen" title="Schließen (Esc)"><i data-lucide="x" aria-hidden="true"></i></button>
+    </header>
+    <div class="ff-dialog-body">
+      <div id="ff-dialog-notice" class="ff-notice" role="status" aria-live="polite"></div>
+      <div id="ff-dialog-content"></div>
+    </div>
+  </dialog>
 </div>

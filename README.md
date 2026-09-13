@@ -31,6 +31,7 @@ Git überschreibt dabei keinen bereits gefüllten Zielordner. Die Dateien sollte
 
 ## Enthaltene Funktionen
 
+- Fristdetails und Einstellungen öffnen sich in einem Dialogfenster über der Übersicht. Auch Bearbeitungen und Projektformulare bleiben im Fenster. Schließen über das Kreuz, Escape oder den Hintergrund; Ansicht, aufgeklappte Projekte und Scrollposition bleiben erhalten. Nicht gespeicherte Eingaben werden beim Schließen verworfen.
 - „Meine Fristen“: zugeordnete/betreute Fristen, zeitlich aktive Assistenzvertretungen und persönliche Abonnements.
 - „Fristen Kanzlei“: alle offenen Fristen; einzelne Fristen per Lesezeichen abonnieren. Abonnieren ändert keine Zuständigkeiten oder Bearbeitungsrechte.
 - „Übersicht“ für Partner: Fristen mit ihrer wirksamen Partnerverantwortung. Projektvorgaben werden übernommen, individuelle Abweichungen berücksichtigt.
