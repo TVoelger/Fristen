@@ -1,0 +1,240 @@
+html { color-scheme: light dark; }
+body { margin: 0; background: light-dark(#fff, #191d23); }
+
+    #fristen-app {
+      --ff-paper: light-dark(#ffffff, #191d23);
+      --ff-ink: light-dark(#202832, #eef0f3);
+      --ff-muted: light-dark(#69727b, #a8afb8);
+      --ff-line: light-dark(#e8eaed, #333940);
+      --ff-tree-line: light-dark(#b8c0c9, #65717e);
+      --ff-soft: light-dark(#f5f6f7, #242a31);
+      --ff-accent: light-dark(#243447, #dde6f0);
+      --ff-red: light-dark(#bd4b4b, #ee9393);
+      --ff-blue: light-dark(#4e73a3, #99b5dd);
+      --ff-marker-blue: light-dark(#2b61a8, #b1cef5);
+      --ff-amber: light-dark(#9c691f, #dfb16f);
+      --ff-green: light-dark(#4f9369, #86c59e);
+      --ff-orange: light-dark(#d58b2e, #e6b16b);
+      --ff-shadow: light-dark(#17202c12, #00000038);
+      --ff-row-pad-y: 10px;
+      color: var(--ff-ink); background: var(--ff-paper);
+      font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      width: 100%; min-width: 0;
+    }
+    #fristen-app * { box-sizing: border-box; }
+    #fristen-app [hidden] { display: none !important; }
+    #fristen-app h1, #fristen-app h2, #fristen-app h3, #fristen-app p { margin: 0; }
+    #fristen-app h1 { font-size: 26px; font-weight: 500; letter-spacing: -.7px; line-height: 1.3; }
+    #fristen-app h2 { font-size: 16px; font-weight: 500; }
+    #fristen-app strong { font-weight: 500; }
+    #fristen-app button, #fristen-app input, #fristen-app select, #fristen-app textarea { font: inherit; color: inherit; }
+    #fristen-app button { cursor: pointer; border: 0; background: transparent; padding: 0; text-align: left; }
+    #fristen-app button:disabled { cursor: default; opacity: .5; }
+    #fristen-app summary { cursor: pointer; }
+    #fristen-app .ff-small { font-size: 12px; }
+    #fristen-app .ff-muted { color: var(--ff-muted); }
+    #fristen-app .ff-top { display: flex; align-items: center; gap: 34px; padding: 12px 38px; border-bottom: 1px solid var(--ff-line); }
+    #fristen-app .ff-brand { letter-spacing: .13em; font-size: 12px; white-space: nowrap; font-weight: 500; }
+    #fristen-app .ff-brand-short { display: none; }
+    #fristen-app .ff-nav { display: flex; gap: 24px; align-items: center; flex: 1; }
+    #fristen-app .ff-nav button { color: var(--ff-muted); padding: 5px 0; }
+    #fristen-app .ff-nav button[aria-current="page"] { color: var(--ff-ink); font-weight: 500; }
+    #fristen-app .ff-menu { position: relative; }
+    #fristen-app .ff-menu > summary { display: flex; align-items: center; gap: 8px; list-style: none; }
+    #fristen-app summary::-webkit-details-marker { display: none; }
+    #fristen-app .ff-avatar { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--ff-soft); font-size: 11px; }
+    #fristen-app .ff-menu-body { position: absolute; z-index: 10; top: calc(100% + 12px); left: 0; min-width: 215px; max-width: 270px; padding: 8px; border: 1px solid var(--ff-line); border-radius: 9px; background: var(--ff-paper); box-shadow: 0 8px 30px var(--ff-shadow); }
+    #fristen-app .ff-profile .ff-menu-body { right: 0; left: auto; }
+    #fristen-app .ff-profile-name { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    #fristen-app .ff-menu-body button { display: block; width: 100%; padding: 9px 10px; border-radius: 5px; }
+    #fristen-app .ff-menu-body button:hover { background: var(--ff-soft); }
+    #fristen-app .ff-menu-label { padding: 7px 10px 3px; color: var(--ff-muted); font-size: 12px; }
+    #fristen-app .ff-menu-separator { border-top: 1px solid var(--ff-line); margin-top: 6px; padding-top: 6px; }
+    #fristen-app .ff-main { padding: 22px 38px 18px; }
+    #fristen-app .ff-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 18px; }
+    #fristen-app .ff-heading > div { min-width: 0; max-width: 100%; }
+    #fristen-app .ff-heading .ff-menu > summary h1 { min-width: 0; overflow-wrap: anywhere; }
+    #fristen-app .ff-heading-sub { color: var(--ff-muted); font-size: 12px; margin-top: 4px; }
+    #fristen-app .ff-primary { padding: 10px 15px; background: var(--ff-accent); color: var(--ff-paper); border-radius: 6px; text-align: center; }
+    #fristen-app .ff-secondary { padding: 9px 14px; border: 1px solid var(--ff-line); border-radius: 6px; text-align: center; }
+    #fristen-app .ff-text-action { color: var(--ff-muted); padding: 5px 0; }
+    #fristen-app .ff-text-action:hover { color: var(--ff-ink); text-decoration: underline; }
+    #fristen-app .ff-deadline-list { --ff-date-width: 208px; }
+    #fristen-app .ff-deadline-list[data-has-time="true"] { --ff-date-width: 240px; }
+    #fristen-app .ff-columns, #fristen-app .ff-row { display: grid; grid-template-columns: minmax(0,1fr) var(--ff-date-width); column-gap: 20px; row-gap: 4px; }
+    #fristen-app .ff-columns { font-size: 12px; color: var(--ff-muted); padding: 0 0 8px; border-bottom: 1px solid var(--ff-line); }
+    #fristen-app .ff-columns span:last-child { text-align: right; padding-right: 28px; }
+    #fristen-app .ff-row-shell { position: relative; min-width: 0; }
+    #fristen-app .ff-row-shell[data-subscription-only="true"] { background: var(--ff-soft); }
+    #fristen-app .ff-subscribe { position: absolute; top: 8px; right: 0; z-index: 2; width: 24px; height: 24px; display: grid; place-items: center; color: var(--ff-muted); }
+    #fristen-app .ff-subscribe[aria-pressed="true"] { color: var(--ff-ink); }
+    #fristen-app .ff-subscribe[aria-pressed="true"] svg { fill: currentColor; }
+    #fristen-app .ff-subscribe-text { display: inline-flex; align-items: center; gap: 6px; }
+    #fristen-app .ff-subscription-note { flex: 0 0 auto; white-space: nowrap; color: var(--ff-muted); font-size: 12px; }
+    #fristen-app .ff-row { width: 100%; padding: var(--ff-row-pad-y) 0; border-bottom: 1px solid var(--ff-line); align-items: start; }
+    #fristen-app .ff-row:hover .ff-title { text-decoration: underline; text-underline-offset: 4px; }
+    #fristen-app .ff-row > span { min-width: 0; }
+    #fristen-app .ff-title { display: block; font-weight: 500; overflow-wrap: anywhere; }
+    #fristen-app .ff-row-title .ff-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #fristen-app .ff-row-title-line { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
+    #fristen-app .ff-row-title-line .ff-title { min-width: 0; flex: 0 1 auto; }
+    #fristen-app .ff-row-reference { display: inline-flex; align-items: baseline; flex-shrink: 0; white-space: nowrap; font-size: 12px; font-weight: 400; }
+    #fristen-app .ff-row-az { color: var(--ff-muted); }
+    #fristen-app .ff-row-title { grid-column: 1; grid-row: 1; }
+    #fristen-app .ff-row > .ff-date { grid-column: 2; grid-row: 1; padding-right: 28px; }
+    #fristen-app .ff-row > .ff-row-timeline { grid-column: 1 / -1; grid-row: 2; display: flex; gap: 8px; align-items: flex-start; min-width: 0; font-size: 12px; }
+    #fristen-app .ff-row-timeline > .ff-owners { flex: 0 1 auto; max-width: 42%; }
+    #fristen-app .ff-row-timeline > .ff-meter-row { flex: 1 1 0; min-width: 0; margin-top: 0; }
+    #fristen-app .ff-sub { display: block; font-size: 12px; color: var(--ff-muted); margin-top: 3px; overflow-wrap: anywhere; }
+    #fristen-app .ff-exception { color: var(--ff-red); margin-left: 6px; }
+    #fristen-app .ff-preliminary-date { position: absolute; top: 11px; width: 36px; transform: translateX(-50%); font-size: 12px; line-height: 18px; font-weight: 400; font-variant-numeric: tabular-nums; color: var(--ff-muted); text-align: center; white-space: nowrap; }
+    #fristen-app .ff-status { display: block; font-size: 13px; }
+    #fristen-app .ff-date { text-align: right; font-variant-numeric: tabular-nums; }
+    #fristen-app .ff-date-main { font-weight: 500; display: block; white-space: nowrap; }
+    #fristen-app .ff-row .ff-status { margin-top: 4px; font-size: 12px; color: var(--ff-muted); }
+    #fristen-app .ff-row .ff-warning { color: var(--ff-amber); }
+    #fristen-app .ff-owners { display: flex; align-items: baseline; justify-content: flex-start; gap: 6px; font-size: 12px; white-space: nowrap; min-width: 0; }
+    #fristen-app .ff-assignees { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    #fristen-app .ff-owners .ff-partner-inline { display: inline-flex; gap: 0; min-width: 0; max-width: 62%; }
+    #fristen-app .ff-partner-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    #fristen-app .ff-partner-note { display: block; font-size: 12px; color: var(--ff-muted); }
+    #fristen-app .ff-partner-picks { border: 0; min-width: 0; padding: 0; margin: 0; }
+    #fristen-app .ff-partner-source { margin: 6px 0 16px; color: var(--ff-muted); font-size: 12px; }
+    #fristen-app .ff-fieldgroup { margin-bottom: 18px; }
+    #fristen-app .ff-fieldgroup > .ff-keylabel { display: block; margin-bottom: 10px; }
+    #fristen-app .ff-settings-section { margin-bottom: 22px; }
+    #fristen-app .ff-settings-section h2 { margin-bottom: 12px; }
+    #fristen-app .ff-tree-project { border-bottom: 1px solid var(--ff-line); }
+    #fristen-app .ff-tree-project > summary { position: relative; display: flex; align-items: center; gap: 9px; list-style: none; padding: 12px 0 8px; }
+    #fristen-app .ff-tree-project[open] > summary::after { content: ""; position: absolute; left: 7px; top: calc(50% + 12px); bottom: 0; width: 1px; background: var(--ff-tree-line); pointer-events: none; }
+    #fristen-app .ff-tree-heading { display: block; min-width: 0; flex: 1; }
+    #fristen-app .ff-tree-name { font-weight: 500; }
+    #fristen-app button.ff-tree-name:hover { text-decoration: underline; text-underline-offset: 3px; }
+    #fristen-app .ff-empty-project { padding: 5px 0 10px 44px; color: var(--ff-muted); font-size: 12px; }
+    #fristen-app .ff-tree-partners { display: inline-block; max-width: calc(100% - 6px); margin-left: 6px; font-size: 12px; font-weight: 400; color: var(--ff-muted); vertical-align: baseline; }
+    #fristen-app button.ff-tree-partners:hover { text-decoration: underline; text-underline-offset: 3px; }
+    #fristen-app .ff-tree-chevron { display: inline-flex; width: 16px; height: 16px; flex-shrink: 0; color: var(--ff-muted); }
+    #fristen-app .ff-tree-project[open] > summary .ff-tree-chevron { transform: rotate(90deg); }
+    #fristen-app .ff-tree-next { display: flex; flex-direction: column; align-items: flex-end; font-size: 12px; }
+    #fristen-app .ff-tree-project[open] > summary .ff-tree-next { display: none; }
+    #fristen-app .ff-tree-children .ff-row-shell::before { content: ""; position: absolute; z-index: 1; left: 7px; top: 0; bottom: -1px; width: 1px; background: var(--ff-tree-line); pointer-events: none; }
+    #fristen-app .ff-tree-children .ff-row-shell::after { content: ""; position: absolute; z-index: 1; left: 7px; top: calc(var(--ff-row-pad-y) + .75em); width: 26px; height: 1px; background: var(--ff-tree-line); pointer-events: none; }
+    #fristen-app .ff-tree-children .ff-row-shell:last-child .ff-row { border-bottom: 0; }
+    #fristen-app .ff-tree-children .ff-row-shell:last-child::before { bottom: auto; height: calc(var(--ff-row-pad-y) + .75em); }
+    #fristen-app .ff-tree-children .ff-row-title { padding-left: 44px; }
+    #fristen-app .ff-tree-children .ff-row-timeline > .ff-owners { padding-left: 44px; }
+    #fristen-app .ff-tree-children { padding-bottom: 6px; }
+    #fristen-app .ff-today { color: var(--ff-red); }
+    #fristen-app .ff-warning { color: var(--ff-amber); }
+    #fristen-app .ff-meter-row { --ff-meter-color: var(--ff-green); display: grid; grid-template-columns: minmax(0,1fr) 18px; gap: 6px; align-items: center; min-height: 18px; margin-top: 3px; }
+    #fristen-app .ff-meter-row[data-has-preliminary-label="true"] { padding-bottom: 18px; }
+    #fristen-app .ff-meter-row[data-tone="orange"] { --ff-meter-color: var(--ff-orange); }
+    #fristen-app .ff-meter-row[data-tone="red"] { --ff-meter-color: var(--ff-red); }
+    #fristen-app .ff-meter-row[data-tone="blue"] { --ff-meter-color: var(--ff-blue); }
+    #fristen-app .ff-meter { display: block; position: relative; height: 4px; background: var(--ff-line); border-radius: 3px; overflow: hidden; }
+    #fristen-app .ff-meter-track { display: block; position: relative; height: 4px; }
+    #fristen-app .ff-meter-preliminary { position: absolute; top: 0; bottom: 0; left: 0; background: var(--ff-blue); border-radius: 3px 0 0 3px; pointer-events: none; }
+    #fristen-app .ff-preliminary-pin { position: absolute; top: 50%; width: 8px; height: 8px; border-radius: 1px; transform: translate(-50%,-50%) rotate(45deg); background: var(--ff-marker-blue); pointer-events: none; }
+    #fristen-app .ff-preliminary-timeline { display: block; width: 100%; padding: 10px 0; }
+    #fristen-app .ff-preliminary-timeline .ff-meter-row { margin-top: 0; }
+    #fristen-app .ff-timeline-labels { display: flex; justify-content: space-between; gap: 14px; color: var(--ff-muted); font-size: 12px; }
+    #fristen-app .ff-date-actions { display: grid; gap: 6px; justify-items: end; }
+    #fristen-app .ff-meter-fill { height: 100%; display: block; background: var(--ff-meter-color); border-radius: 3px; }
+    #fristen-app .ff-timeline-status { color: var(--ff-muted); font-size: 12px; margin-top: 10px; }
+    #fristen-app .ff-detail-meter { margin-top: 10px; max-width: 360px; }
+    #fristen-app .ff-meter-plus { display: grid; place-items: center; width: 18px; height: 18px; line-height: 0; color: var(--ff-muted); }
+    #fristen-app .ff-meter-plus > i, #fristen-app .ff-meter-plus > svg { display: block; width: 16px; height: 16px; }
+    #fristen-app .ff-footer { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 16px; color: var(--ff-muted); font-size: 11px; }
+    #fristen-app .ff-empty { padding: 30px 0; color: var(--ff-muted); }
+    #fristen-app .ff-notice { padding: 0 0 12px; color: var(--ff-muted); }
+    #fristen-app .ff-notice:empty { display: none; }
+    #fristen-app .ff-back { display: inline-flex; gap: 8px; align-items: center; color: var(--ff-muted); margin-bottom: 18px; }
+    #fristen-app .ff-detail { max-width: 720px; margin: 0 auto; }
+    #fristen-app .ff-detail-title { margin-bottom: 18px; }
+    #fristen-app .ff-detail-date { padding: 0 0 18px; border-bottom: 1px solid var(--ff-line); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    #fristen-app .ff-detail-date strong { display: block; font-size: 21px; letter-spacing: -.4px; }
+    #fristen-app .ff-keyrow { display: grid; grid-template-columns: 150px minmax(0,1fr) auto; gap: 18px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--ff-line); }
+    #fristen-app .ff-keylabel { font-size: 12px; color: var(--ff-muted); padding-top: 2px; }
+    #fristen-app .ff-disclosure { border-bottom: 1px solid var(--ff-line); }
+    #fristen-app .ff-disclosure > summary { display: flex; align-items: center; justify-content: space-between; list-style: none; padding: 12px 0; }
+    #fristen-app .ff-disclosure[open] > summary i { transform: rotate(180deg); }
+    #fristen-app .ff-disclosure-content { padding: 0 0 16px; }
+    #fristen-app .ff-steps { list-style: none; margin: 0; padding: 0; }
+    #fristen-app .ff-step { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 8px 0; }
+    #fristen-app .ff-step-date { flex-shrink: 0; font-size: 12px; color: var(--ff-muted); }
+    #fristen-app .ff-history { list-style: none; margin: 12px 0 0; padding: 0; color: var(--ff-muted); font-size: 12px; display: grid; gap: 6px; }
+    #fristen-app .ff-meta { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 12px 16px; margin: 0; font-size: 12px; }
+    #fristen-app .ff-meta dt { color: var(--ff-muted); }
+    #fristen-app .ff-meta dd { margin: 0; overflow-wrap: anywhere; }
+    #fristen-app .ff-actions { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; padding-top: 18px; }
+    #fristen-app .ff-form { max-width: 590px; }
+    #fristen-app .ff-form:has(input[name="title"]) { max-width: 720px; }
+    #fristen-app .ff-field { display: grid; gap: 7px; margin-bottom: 16px; min-width: 0; }
+    #fristen-app .ff-field > span { color: var(--ff-muted); font-size: 12px; }
+    #fristen-app .ff-field input, #fristen-app .ff-field select, #fristen-app .ff-field textarea { width: 100%; min-width: 0; border: 1px solid var(--ff-line); background: var(--ff-paper); padding: 10px 11px; border-radius: 6px; }
+    #fristen-app .ff-field textarea { resize: vertical; }
+    #fristen-app .ff-formgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    #fristen-app .ff-checks { display: flex; flex-wrap: wrap; gap: 12px 22px; }
+    #fristen-app .ff-check { display: flex; align-items: center; gap: 8px; min-width: 0; max-width: 100%; }
+    #fristen-app .ff-check > input { flex-shrink: 0; }
+    #fristen-app .ff-check > span { min-width: 0; overflow-wrap: anywhere; }
+    #fristen-app input[type="checkbox"] { accent-color: var(--ff-accent); }
+    #fristen-app .ff-error { color: var(--ff-red); margin-top: 16px; }
+    #fristen-app .ff-error:empty { display: none; }
+    #fristen-app .ff-danger { background: var(--ff-red); color: var(--ff-paper); }
+    #fristen-app .ff-text-action.ff-danger-text { color: var(--ff-red); }
+    #fristen-app .ff-project-delete-action { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--ff-line); }
+    #fristen-app .ff-delete-summary { margin-bottom: 20px; }
+    #fristen-app .ff-delete-choices { display: grid; gap: 16px; margin: 18px 0; }
+    #fristen-app .ff-delete-choices .ff-check { align-items: flex-start; }
+    #fristen-app .ff-delete-choices input { margin-top: 4px; accent-color: var(--ff-accent); }
+    #fristen-app .ff-delete-warning { display: flex; align-items: flex-start; gap: 9px; color: var(--ff-red); margin-bottom: 16px; }
+    #fristen-app .ff-delete-warning > svg, #fristen-app .ff-delete-warning > i { flex-shrink: 0; margin-top: 3px; }
+    #fristen-app .ff-delete-open { margin: 10px 0 20px; }
+    #fristen-app .ff-delete-open .ff-step > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+    #fristen-app .ff-project-row { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 22px; padding: 23px 0; border-bottom: 1px solid var(--ff-line); }
+    #fristen-app .ff-project-row:hover .ff-title { text-decoration: underline; }
+    #fristen-app .ff-group-label { color: var(--ff-muted); font-size: 12px; margin: 30px 0 0; }
+    #fristen-app .ff-project-row > span:last-child { font-size: 12px; color: var(--ff-muted); flex-shrink: 0; }
+    #fristen-app .ff-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; clip: rect(0,0,0,0); overflow: hidden; white-space: nowrap; }
+    @media (max-width: 740px) {
+      #fristen-app .ff-top { gap: 24px; padding: 10px 24px; }
+      #fristen-app .ff-main { padding: 20px 24px 16px; }
+      #fristen-app .ff-brand-full { display: none; }
+      #fristen-app .ff-brand-short { display: inline; }
+      #fristen-app .ff-columns, #fristen-app .ff-row { column-gap: 14px; }
+      #fristen-app .ff-keyrow { grid-template-columns: 120px minmax(0,1fr) auto; gap: 12px; }
+    }
+    @media (max-width: 680px) {
+      #fristen-app .ff-top { padding: 8px 18px; gap: 20px; }
+      #fristen-app .ff-nav { gap: 18px; font-size: 13px; }
+      #fristen-app .ff-profile-name { display: none; }
+      #fristen-app .ff-profile > summary > i { display: none; }
+      #fristen-app .ff-main { padding: 18px 18px 14px; }
+      #fristen-app h1 { font-size: 23px; }
+      #fristen-app .ff-heading { gap: 12px; margin-bottom: 16px; }
+      #fristen-app .ff-columns { display: none; }
+      #fristen-app .ff-row { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 5px 14px; align-items: start; padding: var(--ff-row-pad-y) 0; }
+      #fristen-app .ff-row-title { grid-column: 1 / -1; grid-row: 1; padding-right: 28px; }
+      #fristen-app .ff-row > .ff-date { grid-column: 1 / -1; grid-row: 2; padding-right: 0; }
+      #fristen-app .ff-row > .ff-row-timeline { grid-row: 3; }
+      #fristen-app .ff-tree-next { max-width: 146px; text-align: right; }
+      #fristen-app .ff-keyrow { grid-template-columns: minmax(0,1fr) auto; gap: 8px 15px; }
+      #fristen-app .ff-keylabel { grid-column: 1 / -1; }
+      #fristen-app .ff-formgrid { grid-template-columns: 1fr; gap: 0; }
+      #fristen-app .ff-detail-date strong { font-size: 19px; }
+      #fristen-app .ff-project-row { align-items: start; }
+      #fristen-app .ff-step { flex-wrap: wrap; gap: 4px; }
+      #fristen-app .ff-footer { margin-top: 16px; }
+    }
+    @media (pointer: coarse) {
+      #fristen-app button, #fristen-app summary { min-height: 44px; }
+      #fristen-app .ff-row-shell { padding-right: 48px; }
+      #fristen-app .ff-subscribe { width: 44px; height: 44px; top: 4px; }
+      #fristen-app .ff-row-title, #fristen-app .ff-row > .ff-date { padding-right: 0; }
+      #fristen-app .ff-columns { padding-right: 48px; }
+      #fristen-app .ff-columns span:last-child { padding-right: 0; }
+      #fristen-app input, #fristen-app select, #fristen-app textarea { font-size: 16px; }
+      #fristen-app .ff-check { min-height: 44px; }
+    }
+  

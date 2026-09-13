@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 1,
+  "activeUser": "clara",
+  "nextDeadlineId": 10,
+  "people": {
+    "till": {
+      "name": "Till Völger",
+      "initials": "TV",
+      "role": "lawyer"
+    },
+    "lena": {
+      "name": "Lena Weber",
+      "initials": "LW",
+      "role": "lawyer"
+    },
+    "jonas": {
+      "name": "Jonas Neumann",
+      "initials": "JN",
+      "role": "lawyer"
+    },
+    "felix": {
+      "name": "Dr. Felix Brandt",
+      "initials": "FB",
+      "role": "partner"
+    },
+    "mara": {
+      "name": "Dr. Mara König",
+      "initials": "MK",
+      "role": "partner"
+    },
+    "clara": {
+      "name": "Clara Beck",
+      "initials": "ClB",
+      "role": "assistant"
+    },
+    "sophie": {
+      "name": "Sophie Adler",
+      "initials": "SoA",
+      "role": "assistant"
+    }
+  },
+  "projects": {
+    "meridian": {
+      "name": "Meridian · Patentstreit",
+      "partners": [
+        "felix"
+      ],
+      "history": []
+    },
+    "nordlicht": {
+      "name": "Nordlicht · Markenportfolio",
+      "partners": [
+        "felix",
+        "mara"
+      ],
+      "history": []
+    }
+  },
+  "matters": {
+    "m1": {
+      "name": "Meridian / Auron",
+      "short": "Meridian",
+      "code": "26/041",
+      "court": "OLG · Berufungsverfahren",
+      "project": "meridian"
+    },
+    "m2": {
+      "name": "Meridian / Auron",
+      "short": "Meridian",
+      "code": "26/042",
+      "court": "BPatG · Nichtigkeitsverfahren",
+      "project": "meridian"
+    },
+    "m3": {
+      "name": "Varena / Belvia",
+      "short": "Varena",
+      "code": "26/078",
+      "court": "Eilverfahren",
+      "project": null
+    },
+    "m4": {
+      "name": "Nordlicht / Velora",
+      "short": "Nordlicht",
+      "code": "26/063",
+      "court": "OLG · Berufungsverfahren",
+      "project": null
+    },
+    "m5": {
+      "name": "Nordlicht / Velora",
+      "short": "Nordlicht",
+      "code": "26/081",
+      "court": "LG · Verletzungsverfahren",
+      "project": "nordlicht"
+    }
+  },
+  "items": [
+    {
+      "id": "f1",
+      "title": "Berufungsbegründung",
+      "matter": "m1",
+      "project": "meridian",
+      "kind": "pleading",
+      "notfrist": false,
+      "day": "2026-09-14",
+      "time": "day",
+      "assignees": [
+        "till",
+        "lena"
+      ],
+      "partners": null,
+      "status": "Offen",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Zustellungsnachweis und bewilligte Fristverlängerung",
+      "history": [
+        "10.09. · {{person:clara}}: Fristdaten abgeglichen."
+      ]
+    },
+    {
+      "id": "f2",
+      "title": "Entwurf der Stellungnahme",
+      "matter": "m2",
+      "project": "meridian",
+      "kind": "internal",
+      "notfrist": false,
+      "day": "2026-09-15",
+      "time": "day",
+      "assignees": [
+        "till",
+        "jonas"
+      ],
+      "partners": null,
+      "status": "Offen",
+      "parent": "f3",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Manuell festgelegte interne Frist",
+      "history": [
+        "07.09. · {{person:clara}}: Interne Frist auf den 15.09.2026 gesetzt."
+      ]
+    },
+    {
+      "id": "f3",
+      "title": "Stellungnahme zur Nichtigkeitsklage",
+      "matter": "m2",
+      "project": "meridian",
+      "kind": "pleading",
+      "notfrist": false,
+      "day": "2026-09-18",
+      "time": "day",
+      "assignees": [
+        "jonas",
+        "till"
+      ],
+      "partners": null,
+      "status": "Offen",
+      "verified": true,
+      "calendar": "Abgleich ausstehend",
+      "source": "Gerichtliche Verfügung vom 21.08.2026",
+      "history": [
+        "14.09. · Kalenderabgleich für {{person:jonas}} ausstehend."
+      ]
+    },
+    {
+      "id": "f4",
+      "title": "Verfügungsantrag vorbereiten",
+      "matter": "m3",
+      "project": null,
+      "kind": "urgency",
+      "notfrist": false,
+      "day": "2026-09-16",
+      "time": "12:00",
+      "assignees": [
+        "till"
+      ],
+      "partners": [
+        "mara"
+      ],
+      "status": "Offen",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Manuell erfasste Dringlichkeitsfrist · Beispieldaten",
+      "history": [
+        "11.09. · {{person:mara}}: Frist manuell gesetzt."
+      ]
+    },
+    {
+      "id": "f5",
+      "title": "Berufung einlegen",
+      "matter": "m4",
+      "project": null,
+      "kind": "pleading",
+      "notfrist": true,
+      "day": "2026-09-21",
+      "time": "day",
+      "assignees": [
+        "lena",
+        "till"
+      ],
+      "partners": [
+        "felix"
+      ],
+      "status": "Offen",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Zustellungsnachweis",
+      "history": [
+        "14.09. · {{person:lena}} und {{person:till}} zugeordnet."
+      ]
+    },
+    {
+      "id": "f6",
+      "title": "Klageerwiderung",
+      "matter": "m5",
+      "project": "nordlicht",
+      "kind": "pleading",
+      "notfrist": false,
+      "day": "2026-09-22",
+      "time": "day",
+      "preliminary": {
+        "day": "2026-09-18"
+      },
+      "assignees": [
+        "felix",
+        "jonas"
+      ],
+      "partners": null,
+      "status": "Offen",
+      "verified": false,
+      "calendar": "Abgleich ausstehend",
+      "source": "Gerichtliche Verfügung vom 10.09.2026",
+      "history": [
+        "14.09. · {{person:clara}}: Frist erfasst, Prüfung offen."
+      ]
+    },
+    {
+      "id": "f7",
+      "title": "Stellungnahme zum gerichtlichen Hinweis",
+      "matter": "m2",
+      "project": "meridian",
+      "kind": "pleading",
+      "notfrist": false,
+      "day": "2026-11-09",
+      "time": "day",
+      "preliminary": {
+        "day": "2026-10-19"
+      },
+      "assignees": [
+        "till",
+        "jonas"
+      ],
+      "partners": [
+        "mara"
+      ],
+      "status": "Offen",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Gerichtlicher Hinweis · Beispieldaten",
+      "history": [
+        "14.09. · Individuelle Partnerzuordnung: ({{person:mara}})."
+      ]
+    },
+    {
+      "id": "f8",
+      "title": "Abstimmung mit Mandantin",
+      "matter": "m2",
+      "project": "meridian",
+      "kind": "internal",
+      "notfrist": false,
+      "day": "2026-10-05",
+      "time": "day",
+      "assignees": [
+        "till",
+        "jonas"
+      ],
+      "partners": null,
+      "status": "Offen",
+      "parent": "f7",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Manuell festgelegte interne Frist",
+      "history": [
+        "14.09. · {{person:till}}: Interne Frist gesetzt."
+      ]
+    },
+    {
+      "id": "f9",
+      "title": "Einstweilige Verfügung vollziehen",
+      "matter": "m3",
+      "project": null,
+      "kind": "enforcement",
+      "notfrist": false,
+      "day": "2026-09-23",
+      "time": "day",
+      "assignees": [
+        "till"
+      ],
+      "partners": [
+        "mara"
+      ],
+      "status": "Offen",
+      "verified": true,
+      "calendar": "Bestätigt",
+      "source": "Manuell erfasste Vollziehungsfrist · Beispieldaten",
+      "history": [
+        "14.09. · {{person:clara}}: Fristdaten abgeglichen."
+      ]
+    }
+  ],
+  "userSettings": {
+    "till": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    },
+    "lena": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    },
+    "jonas": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    },
+    "felix": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    },
+    "mara": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    },
+    "clara": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    },
+    "sophie": {
+      "weeks": 6,
+      "nameDisplay": "initials"
+    }
+  },
+  "assistantSettings": {
+    "clara": {
+      "lawyers": [
+        "jonas"
+      ],
+      "coverage": {
+        "deputy": "sophie",
+        "from": "2026-09-14",
+        "until": "2026-09-18"
+      }
+    },
+    "sophie": {
+      "lawyers": [
+        "lena"
+      ],
+      "coverage": null
+    }
+  },
+  "subscriptions": {
+    "till": [],
+    "lena": [],
+    "jonas": [],
+    "felix": [],
+    "mara": [],
+    "clara": [
+      "f4"
+    ],
+    "sophie": []
+  }
+}
