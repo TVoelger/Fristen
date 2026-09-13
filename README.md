@@ -19,7 +19,19 @@ npm start
 
 Anschließend [http://127.0.0.1:5173](http://127.0.0.1:5173) öffnen. Das Terminal während der Nutzung geöffnet lassen. Mit `Strg+C` beenden.
 
-Alternativ `Start-Fristen.cmd` doppelt anklicken. Dieses Skript startet die Webversion und öffnet den Browser. Es installiert beim ersten Start die Projektabhängigkeiten, führt aber kein automatisches `git pull` aus.
+Für den täglichen Start `Start-Fristen.cmd` doppelt anklicken. Die Startdatei prüft bei jedem Neustart GitHub, übernimmt neue Änderungen auf `main`, richtet bei Bedarf die Pakete ein und öffnet den Browser. Bereits laufende Versionen werden durch diesen Startmechanismus nicht im Hintergrund aktualisiert.
+
+Läuft Fristen bereits auf Port 5173, öffnet die Startdatei die vorhandene Anwendung im Browser. Sie startet keinen zweiten Server. Ein anderer oder nicht erkennbarer Dienst auf diesem Port wird gemeldet.
+
+Die automatische Aktualisierung führt nur Fast-Forward-Updates aus. Bei lokalen Dateiänderungen, einem anderen Entwicklungszweig oder einem fehlgeschlagenen Abgleich startet sie mit dem vorhandenen Stand. Es werden keine lokalen Änderungen verworfen oder automatisch zusammengeführt. Wenn Pakete erstmals oder nach einer Änderung eingerichtet werden müssen, ist dafür eine funktionierende npm-Verbindung erforderlich.
+
+Wer noch die erste Startdatei besitzt, übernimmt die automatische Aktualisierung einmalig in einem zusätzlichen PowerShell-Fenster:
+
+```powershell
+git -C "C:\Fristen-Tool" pull --ff-only origin main
+```
+
+Anschließend das bisherige Startfenster schließen und `Start-Fristen.cmd` neu öffnen. Künftig genügt dieser Doppelklick für Aktualisierung und Start.
 
 Ist der Ordner noch kein Git-Repository, kann das Projekt in einen neuen Ordner geklont werden:
 
